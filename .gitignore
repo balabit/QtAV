@@ -24,7 +24,6 @@ TestResults
 *.deb
 
 *.git.old*
-Makefile*
 *.*pro*.user*
 *.[oa]
 *.so*
@@ -71,3 +70,5 @@ Release
 
 #cache
 *.swp
+
+build.win32*
