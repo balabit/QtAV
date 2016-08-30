@@ -33,7 +33,6 @@ TestResults
 *.deb
 
 *.git.old*
-Makefile*
 *.*pro*.user*
 *.[oa]
 *.so*
@@ -88,3 +87,5 @@ python/QtAVWidgets
 
 #cache
 *.swp
+
+build.win32*
