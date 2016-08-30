@@ -1,0 +1,28 @@
+QtAV
+----
+For details on QtAV itself, see README.md
+
+
+UPGRADE
+-------
+
+# fetch changes from upstream:
+git remote add upstream https://github.com/wang-bin/QtAV.git
+git fetch upstream
+
+# check the newest version
+git tag | sort -V
+
+# rebase...
+git rebase upstream/<new version>
+
+
+MAKE TARGETS
+------------
+
+# build and install a release/debug version:
+make -f Makefile.win32 debug
+make -f Makefile.win32 release
+
+# clear temporary files produced by the build:
+make -f Makefile.win32 clean
