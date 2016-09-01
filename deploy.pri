@@ -1,5 +1,5 @@
 isEmpty(PROJECTROOT): PROJECTROOT = $$PWD
-INSTALL_PREFIX = /usr/local
+isEmpty(INSTALL_PREFIX): INSTALL_PREFIX = /usr/local
 
 share.files = $$PROJECTROOT/qtc_packaging/common/changelog \
 			$$PROJECTROOT/qtc_packaging/common/copyright \
@@ -35,7 +35,7 @@ isEqual(TEMPLATE, app) {
             isEmpty(target.path): target.path = $${INSTALL_PREFIX}/bin
         }
 } else {
-	unix:!symbian {
+	if (unix:!symbian | win32) {
 		sdkheaders.files = $$SDK_HEADERS
                 sdkheaders_private.files = $$SDK_PRIVATE_HEADERS
 		isEmpty(SDK_HEADERS) {
@@ -46,6 +46,10 @@ isEqual(TEMPLATE, app) {
                 !plugin: target.path = $$[QT_INSTALL_LIBS]
                 INSTALLS += sdkheaders sdkheaders_private
 	}
+}
+
+win32 {
+    target.path = $${INSTALL_PREFIX}/bin
 }
 
 INSTALLS *= target share
