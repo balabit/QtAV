@@ -11,7 +11,7 @@ ENV=PATH=$(QT_PATH)/bin:$(MXE_PATH)/usr/bin:${PATH} \
      PKG_CONFIG_PATH=$(MXE_PATH)/usr/$(XTYPE)/lib/pkgconfig \
      PKG_CONFIG_PATH_i686_w64_mingw32_shared=$$PKG_CONFIG_PATH
 
-all: debug release
+all: release
 
 debug: build-debug
 
@@ -20,7 +20,8 @@ release: build-release
 build-%:
 	mkdir -p $(BUILDDIR).$*
 	cd $(BUILDDIR).$* && $(ENV) $(QMAKE) .. INSTALL_PREFIX=$(QT_PATH) \
-		CONFIG+=$* CONFIG+=no-widgets CONFIG+=no-examples CONFIG+=no-tests CONFIG+=no-libass
+		CONFIG+=$* CONFIG+=force_debug_info\
+		CONFIG+=no-widgets CONFIG+=no-examples CONFIG+=no-tests CONFIG+=no-libass
 	$(ENV) $(MAKE) -C $(BUILDDIR).$* $(MFLAGS)
 	$(ENV) $(MAKE) -C $(BUILDDIR).$* $(MFLAGS) install
 
