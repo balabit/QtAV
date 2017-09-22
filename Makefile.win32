@@ -21,7 +21,7 @@ build-%:
 	mkdir -p $(BUILDDIR).$*
 	cd $(BUILDDIR).$* && $(ENV) $(QMAKE) .. INSTALL_PREFIX=$(QT_PATH) \
 		CONFIG+=$* CONFIG+=force_debug_info\
-		CONFIG+=no-widgets CONFIG+=no-examples CONFIG+=no-tests CONFIG+=no-libass
+		CONFIG+=no-widgets CONFIG+=no-examples CONFIG+=no-tests
 	$(ENV) $(MAKE) -C $(BUILDDIR).$* $(MFLAGS)
 	$(ENV) $(MAKE) -C $(BUILDDIR).$* $(MFLAGS) install
 
