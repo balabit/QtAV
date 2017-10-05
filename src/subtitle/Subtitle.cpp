@@ -39,7 +39,7 @@
 
 namespace QtAV {
 
-const int kMaxSubtitleSize = 10 * 1024 * 1024; // TODO: remove because we find the matched extenstions
+const int kMaxSubtitleSize = 200 * 1024 * 1024; // TODO: remove because we find the matched extenstions
 
 class Subtitle::Private {
 public:
