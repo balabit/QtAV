@@ -86,6 +86,7 @@ void QmlAVPlayer::classBegin()
     connect(mpPlayer, SIGNAL(started()), SLOT(_q_started()));
     connect(mpPlayer, SIGNAL(stopped()), SLOT(_q_stopped()));
     connect(mpPlayer, SIGNAL(positionChanged(qint64)), SIGNAL(positionChanged()));
+    connect(mpPlayer, SIGNAL(videoPositionChanged(qreal)), SIGNAL(videoPositionChanged(qreal)));
     connect(mpPlayer, SIGNAL(seekableChanged()), SIGNAL(seekableChanged()));
     connect(mpPlayer, SIGNAL(seekFinished(qint64)), this, SIGNAL(seekFinished()), Qt::DirectConnection);
     connect(mpPlayer, SIGNAL(bufferProgressChanged(qreal)), SIGNAL(bufferProgressChanged()));
@@ -623,6 +624,11 @@ int QmlAVPlayer::duration() const
 int QmlAVPlayer::position() const
 {
     return mpPlayer ? mpPlayer->position() : 0;
+}
+
+qreal QmlAVPlayer::videoPosition() const
+{
+    return mpPlayer ? mpPlayer->videoPosition() : 0;
 }
 
 bool QmlAVPlayer::isSeekable() const

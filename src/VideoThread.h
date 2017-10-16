@@ -47,6 +47,9 @@ public:
     void setSaturation(int val);
     void setEQ(int b, int c, int s);
 
+Q_SIGNALS:
+    void videoPosition(qreal seconds);
+
 public Q_SLOTS:
     void addCaptureTask();
     void clearRenderers();

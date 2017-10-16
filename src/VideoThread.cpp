@@ -590,7 +590,10 @@ void VideoThread::run()
         if (d.force_dt > 0)
             last_deliver_time = QDateTime::currentMSecsSinceEpoch();
         // TODO: store original frame. now the frame is filtered and maybe converted to renderer perferred format
+
+        emit videoPosition(frame.timestamp());
         d.displayed_frame = frame;
+
         if (d.clock->clockType() == AVClock::AudioClock) {
             const qreal v_a_ = frame.timestamp() - d.clock->value();
             if (!qFuzzyIsNull(v_a_)) {
