@@ -44,6 +44,7 @@ class QmlAVPlayer : public QObject, public QQmlParserStatus
     Q_PROPERTY(Error error READ error NOTIFY errorChanged)
     Q_PROPERTY(int duration READ duration NOTIFY durationChanged)
     Q_PROPERTY(int position READ position NOTIFY positionChanged)
+    Q_PROPERTY(qreal videoPosition READ videoPosition NOTIFY videoPositionChanged)
     Q_PROPERTY(bool muted READ isMuted WRITE setMuted NOTIFY mutedChanged)
     Q_PROPERTY(bool hasAudio READ hasAudio NOTIFY hasAudioChanged)
     Q_PROPERTY(bool hasVideo READ hasVideo NOTIFY hasVideoChanged)
@@ -159,6 +160,7 @@ public:
     void setMuted(bool m);
     int duration() const;
     int position() const;
+    qreal videoPosition() const;  // in seconds
     bool isSeekable() const;
 
     int startPosition() const;
@@ -274,6 +276,7 @@ Q_SIGNALS:
     void hasVideoChanged();
     void durationChanged();
     void positionChanged();
+    void videoPositionChanged(qreal seconds);
     void sourceChanged();
     void autoLoadChanged();
     void loopCountChanged();
@@ -312,6 +315,7 @@ Q_SIGNALS:
     void statusChanged();
     void mediaObjectChanged();
     void audioBackendsChanged();
+
 private Q_SLOTS:
     // connect to signals from player
     void _q_error(const QtAV::AVError& e);

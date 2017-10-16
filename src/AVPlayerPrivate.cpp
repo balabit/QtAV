@@ -80,6 +80,7 @@ AVPlayer::Private::Private()
     , stop_position(kInvalidPosition)
     , start_position_norm(0)
     , stop_position_norm(kInvalidPosition)
+    , videoPosition(0)
     , repeat_max(0)
     , repeat_current(-1)
     , timer_id(-1)
@@ -591,6 +592,7 @@ bool AVPlayer::Private::setupVideoThread(AVPlayer *player)
     QObject::connect(vdec, SIGNAL(error(QtAV::AVError)), player, SIGNAL(error(QtAV::AVError)));
     if (!vthread) {
         vthread = new VideoThread(player);
+        connect(vthread, &VideoThread::videoPosition, player, &QtAV::AVPlayer::setVideoPosition);
         vthread->setClock(clock);
         vthread->setStatistics(&statistics);
         vthread->setVideoCapture(vcapture);

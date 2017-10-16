@@ -69,6 +69,7 @@ class Q_AV_EXPORT AVPlayer : public QObject
     Q_PROPERTY(bool seekable READ isSeekable NOTIFY seekableChanged)
     Q_PROPERTY(qint64 duration READ duration NOTIFY durationChanged)
     Q_PROPERTY(qint64 position READ position WRITE setPosition NOTIFY positionChanged)
+    Q_PROPERTY(qreal videoPosition READ videoPosition WRITE setVideoPosition NOTIFY videoPositionChanged)
     Q_PROPERTY(qint64 startPosition READ startPosition WRITE setStartPosition NOTIFY startPositionChanged)
     Q_PROPERTY(qint64 stopPosition READ stopPosition WRITE setStopPosition NOTIFY stopPositionChanged)
     Q_PROPERTY(qint64 repeat READ repeat WRITE setRepeat NOTIFY repeatChanged)
@@ -178,6 +179,8 @@ public:
      */
     qint64 stopPosition() const; //unit: ms
     qint64 position() const; //unit: ms
+    qreal videoPosition() const; // unit: sec
+
     //0: play once. N: play N+1 times. <0: infinity
     int repeat() const; //or repeatMax()?
     /*!
@@ -487,6 +490,9 @@ public Q_SLOTS:
      * \param position in ms
      */
     void setPosition(qint64 position);
+
+    void setVideoPosition(qreal seconds);
+
     void seek(qreal r); // r: [0, 1]
     void seek(qint64 pos); //ms. same as setPosition(pos)
     void seekForward();
@@ -576,6 +582,7 @@ Q_SIGNALS:
      */
     void seekFinished(qint64 position);
     void positionChanged(qint64 position);
+    void videoPositionChanged(qreal videoPosition);
     void interruptTimeoutChanged();
     void interruptOnTimeoutChanged();
     void notifyIntervalChanged();

@@ -848,6 +848,11 @@ qint64 AVPlayer::position() const
     return pts;
 }
 
+qreal AVPlayer::videoPosition() const
+{
+    return d->videoPosition;
+}
+
 void AVPlayer::setPosition(qint64 position)
 {
     // FIXME: strange things happen if seek out of eof
@@ -865,6 +870,12 @@ void AVPlayer::setPosition(qint64 position)
     d->read_thread->seek(position,pos_pts, seekType());
 
     Q_EMIT positionChanged(position); //emit relative position
+}
+
+void AVPlayer::setVideoPosition(qreal seconds)
+{
+    d->videoPosition = seconds;
+    emit videoPositionChanged(seconds);
 }
 
 int AVPlayer::repeat() const
