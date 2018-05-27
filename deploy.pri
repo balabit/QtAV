@@ -52,7 +52,7 @@ win32 {
     target.path = $${INSTALL_PREFIX}/bin
 }
 
-INSTALLS *= target share
+INSTALLS *= target
 
 for(bin, BIN_INSTALLS) {
     eval($${bin}.path = $${INSTALL_PREFIX}/bin)
