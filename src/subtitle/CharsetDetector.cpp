@@ -20,7 +20,7 @@
 ******************************************************************************/
 #include "CharsetDetector.h"
 #ifdef LINK_UCHARDET
-#include <uchardet/uchardet.h>
+#include <uchardet.h>
 #define HAVE_UCHARDET
 #else
 #ifdef BUILD_UCHARDET
