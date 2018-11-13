@@ -117,6 +117,11 @@ QMAKE_EXTRA_TARGETS += deb_install_list
 target.depends += $${deb_install_list.target}
 }
 
-target.path = $$[QT_INSTALL_QML]/QtAV
-qtav_qml.path = $$[QT_INSTALL_QML]/QtAV
+macx{
+  target.path = $$INSTALL_PREFIX/qml/QtAV
+  qtav_qml.path = $$INSTALL_PREFIX/qml/QtAV
+} else {
+  target.path = $$[QT_INSTALL_QML]/QtAV
+  qtav_qml.path = $$[QT_INSTALL_QML]/QtAV
+}
 !contains(QMAKE_HOST.os, Windows):INSTALLS *= target qtav_qml

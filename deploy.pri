@@ -41,9 +41,15 @@ isEqual(TEMPLATE, app) {
 		isEmpty(SDK_HEADERS) {
 			sdkheaders.files = $$HEADERS
 		}
-                sdkheaders.path = $$[QT_INSTALL_HEADERS]/$$MODULE_INCNAME
-                sdkheaders_private.path = $$[QT_INSTALL_HEADERS]/$$MODULE_INCNAME/$$MODULE_VERSION/$$MODULE_INCNAME/private
-                !plugin: target.path = $$[QT_INSTALL_LIBS]
+                macx {
+                  sdkheaders.path = $$INSTALL_PREFIX/include/$$MODULE_INCNAME
+                  sdkheaders_private.path = $$INSTALL_PREFIX/include/$$MODULE_INCNAME/private
+                  !plugin: target.path = $$INSTALL_PREFIX/lib
+                } else {
+                  sdkheaders.path = $$[QT_INSTALL_HEADERS]/$$MODULE_INCNAME
+                  sdkheaders_private.path = $$[QT_INSTALL_HEADERS]/$$MODULE_INCNAME/$$MODULE_VERSION/$$MODULE_INCNAME/private
+                  !plugin: target.path = $$[QT_INSTALL_LIBS]
+                }
                 INSTALLS += sdkheaders sdkheaders_private
 	}
 }
